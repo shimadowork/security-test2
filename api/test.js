@@ -32,12 +32,20 @@ body: new URLSearchParams({
 
     // 3. 結果をフロントエンドに返す
 res.status(200).json({ 
+  debug_env_value: process.env.AZURE_CLIENT_ID, // 生の値を出力
   status: "Success",
-  message: "デバッグ実行中",
-  // 取得した生データをそのまま文字列にして出力させる
-  rawResponse: JSON.stringify(kvData) || "kvDataは空です", 
-  // HTTPステータスコードも確認
-  azureStatusCode: kvResponse.status 
+  message: "環境変数の読み込みチェック",
+  // 各変数が「読み込めているか」を判定
+  envChecks: {
+    hasKeyVaultUrl: !!process.env.AZURE_KEYVAULT_URL,
+    hasTenantId: !!process.env.AZURE_TENANT_ID,
+    hasClientId: !!process.env.AZURE_CLIENT_ID,
+    // 文字数だけ出力して、正しい値っぽいか確認（例: IDなら36文字）
+    clientIdLength: process.env.AZURE_CLIENT_ID?.length || 0
+  },
+  // 既存のAzure接続デバッグも継続
+  azureStatusCode: kvResponse.status,
+  rawResponse: JSON.stringify(kvData)
 });
   } catch (error) {
     res.status(500).json({ status: "Error", details: error.message });
