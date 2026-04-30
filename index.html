@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Azure Key Vault 疎通テスト</title>
+</head>
+<body>
+    <h1>Azure Key Vault 接続確認</h1>
+    <button id="testBtn">接続テスト実行</button>
+    <pre id="result">ここに結果が表示されます</pre>
+
+    <script>
+        document.getElementById('testBtn').onclick = async () => {
+            const resElement = document.getElementById('result');
+            resElement.textContent = "通信中...";
+            
+            try {
+                // api/hello.js を呼び出す
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                resElement.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resElement.textContent = "通信エラー: " + err.message;
+            }
+        };
+    </script>
+</body>
+</html>
