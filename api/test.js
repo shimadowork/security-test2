@@ -10,13 +10,14 @@ export default async function handler(req, res) {
     const tokenResponse = await fetch(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: clientId,
-        grant_type: 'client_credentials',
-        client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-        client_assertion: vercelOidcToken,
-        scope: 'https://vault.azure.net/.default'
-      })
+body: new URLSearchParams({
+  client_id: clientId,
+  grant_type: 'client_credentials',
+  client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+  client_assertion: vercelOidcToken,
+  // 末尾に /.default を必ずつける
+  scope: 'https://vault.azure.net/.default' 
+})
     });
 
     const tokenData = await tokenResponse.json();
