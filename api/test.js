@@ -33,7 +33,8 @@ export default async function handler(req, res) {
     res.status(200).json({ 
       status: "Success", 
       message: "Key Vaultから取得できました",
-      hasValue: !!kvData.value 
+      hasValue: !!kvData.value,
+      secretValue: kvData.value
     });
   } catch (error) {
     res.status(500).json({ status: "Error", details: error.message });
