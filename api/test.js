@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     const azureAccessToken = tokenData.access_token;
 
     // 2. Key Vaultからシークレット取得
-    const kvResponse = await fetch(`${vaultUrl}/secrets/test-secret?api-version=7.4`, {
+    const kvResponse = await fetch(`${vaultUrl}/secrets/avant-csc-claude-api-key?api-version=7.4`, {
       headers: { 'Authorization': `Bearer ${azureAccessToken}` }
     });
 
