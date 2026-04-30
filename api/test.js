@@ -30,12 +30,14 @@ export default async function handler(req, res) {
     const kvData = await kvResponse.json();
 
     // 3. 結果をフロントエンドに返す
-    res.status(200).json({ 
-      status: "Success", 
-      message: "Key Vaultから取得できました（テスト中）",
-      secretValue: kvData,
-      hasValue: !!kvData.value
-    });
+res.status(200).json({ 
+  status: "Success",
+  message: "デバッグ実行中",
+  // 取得した生データをそのまま文字列にして出力させる
+  rawResponse: JSON.stringify(kvData) || "kvDataは空です", 
+  // HTTPステータスコードも確認
+  azureStatusCode: kvResponse.status 
+});
   } catch (error) {
     res.status(500).json({ status: "Error", details: error.message });
   }
