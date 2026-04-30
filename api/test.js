@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     // 3. 結果をフロントエンドに返す
     res.status(200).json({ 
       status: "Success", 
-      message: "Key Vaultから取得できました",
+      message: "Key Vaultから取得できました（テスト中）",
       hasValue: !!kvData.value,
       secretValue: kvData.value
     });
