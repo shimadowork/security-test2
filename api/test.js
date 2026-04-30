@@ -32,7 +32,10 @@ body: new URLSearchParams({
 
     // 3. 結果をフロントエンドに返す
 res.status(200).json({ 
-  debug_env_value: process.env.AZURE_CLIENT_ID, // 生の値を出力
+  TENANT_ID_env_value: process.env.AZURE_TENANT_ID, // 生の値を出力
+  CLIENT_ID_env_value: process.env.AZURE_CLIENT_ID, // 生の値を出力
+  KEYVAULT_UR_env_value: process.env.AZURE_KEYVAULT_URL, // 生の値を出力
+  VERCEL_OIDC_TOKEN_env_value: process.env.VERCEL_OIDC_TOKEN, // 生の値を出力
   status: "Success",
   message: "環境変数の読み込みチェック",
   // 各変数が「読み込めているか」を判定
